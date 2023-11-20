@@ -1,126 +1,84 @@
-DROP TABLE IF EXISTS `attraction`;
-
-CREATE TABLE `attraction`
+create table attraction
 (
-    `attraction_id`      BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `region`             VARCHAR(255) NULL,
-    `name`               VARCHAR(255) NULL,
-    `description`        VARCHAR(255) NULL,
-    `location_latitude`  DECIMAL(20, 17) NULL,
-    `location_longitude` DECIMAL(20, 17) NULL,
-    `type`               VARCHAR(255) NULL,
-    `image`              VARCHAR(255) NULL,
-    `tel`                VARCHAR(255) NULL
+    attraction_id bigint auto_increment
+        primary key,
+    region        varchar(255)    null,
+    name          varchar(255)    null,
+    description   varchar(255)    null,
+    latitude      decimal(20, 17) null,
+    longitude     decimal(20, 17) null,
+    type          varchar(255)    null,
+    image         varchar(255)    null,
+    tel           varchar(255)    null
 );
 
-DROP TABLE IF EXISTS `user`;
-
-CREATE TABLE `user`
+create table user
 (
-    `user_id`     BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `username`    VARCHAR(255) NULL,
-    `password`    VARCHAR(255) NULL,
-    `nickname`    VARCHAR(255) NULL,
-    `name`        VARCHAR(255) NULL,
-    `region`      VARCHAR(255) NULL,
-    `refresh_token`      VARCHAR(255) NULL,
-    `create_date` TIMESTAMP NULL
+    user_id       bigint auto_increment
+        primary key,
+    username      varchar(255) null,
+    password      varchar(255) null,
+    nickname      varchar(255) null,
+    name          varchar(255) null,
+    region        varchar(255) null,
+    create_date   timestamp    null,
+    refresh_token varchar(255) null
 );
 
-DROP TABLE IF EXISTS `short`;
-
-CREATE TABLE `short`
+create table post
 (
-    `short_id`    BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `user_id`     BIGINT NOT NULL,
-    `region`      VARCHAR(255) NULL,
-    `title`       VARCHAR(255) NULL,
-    `content`     VARCHAR(255) NULL,
-    `like`        INT NULL,
-    `dislike`     INT NULL,
-    `create_date` TIMESTAMP NULL,
-    `file_path`   VARCHAR(255) NULL,
-    `thumbnail`   VARCHAR(255) NULL
+    post_id     bigint auto_increment
+        primary key,
+    user_id     bigint       not null,
+    region      varchar(255) null,
+    title       varchar(255) null,
+    content     varchar(255) null,
+    recruits    int          null,
+    date_time   timestamp    null,
+    place       varchar(255) null,
+    create_date timestamp    null,
+    constraint FK_user_TO_post_1
+        foreign key (user_id) references user (user_id)
 );
 
-DROP TABLE IF EXISTS post_user;
-
-CREATE TABLE `post_member`
+create table post_attraction
 (
-    `post_member_id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `post_id`        BIGINT NOT NULL,
-    `user_id`        BIGINT NOT NULL
+    post_attraction_id bigint auto_increment
+        primary key,
+    attraction_id      bigint not null,
+    post_id            bigint not null,
+    constraint FK_attraction_TO_post_attraction_1
+        foreign key (attraction_id) references attraction (attraction_id),
+    constraint FK_post_TO_post_attraction_1
+        foreign key (post_id) references post (post_id)
 );
 
-DROP TABLE IF EXISTS `post`;
-
-CREATE TABLE `post`
+create table post_user
 (
-    `post_id`     BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `user_id`     BIGINT NOT NULL,
-    `region`      VARCHAR(255) NULL,
-    `title`       VARCHAR(255) NULL,
-    `content`     VARCHAR(255) NULL,
-    `recruits`    INT NULL,
-    `date_time`   TIMESTAMP NULL,
-    `place`       VARCHAR(255) NULL,
-    `create_date` TIMESTAMP NULL
+    post_user_id bigint auto_increment
+        primary key,
+    post_id      bigint not null,
+    user_id      bigint not null,
+    constraint FK_post_TO_post_member_1
+        foreign key (post_id) references post (post_id),
+    constraint FK_user_TO_post_member_1
+        foreign key (user_id) references user (user_id)
 );
 
-DROP TABLE IF EXISTS `post_attraction`;
-
-CREATE TABLE `post_attraction`
+create table short
 (
-    `post_attraction_id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `attraction_id`      BIGINT NOT NULL,
-    `post_id`            BIGINT NOT NULL
+    short_id    bigint auto_increment
+        primary key,
+    user_id     bigint        not null,
+    region      varchar(255)  null,
+    title       varchar(255)  null,
+    content     varchar(255)  null,
+    `like`      int default 0 null,
+    dislike     int default 0 null,
+    create_date timestamp     null,
+    file_path   varchar(255)  null,
+    thumbnail   varchar(255)  null,
+    constraint FK_user_TO_short_1
+        foreign key (user_id) references user (user_id)
 );
-
-ALTER TABLE `short`
-    ADD CONSTRAINT `FK_user_TO_short_1` FOREIGN KEY (
-                                                     `user_id`
-        )
-        REFERENCES `user` (
-                           `user_id`
-            );
-
-ALTER TABLE post_user
-    ADD CONSTRAINT `FK_post_TO_post_member_1` FOREIGN KEY (
-                                                           `post_id`
-        )
-        REFERENCES `post` (
-                           `post_id`
-            );
-
-ALTER TABLE post_user
-    ADD CONSTRAINT `FK_user_TO_post_member_1` FOREIGN KEY (
-                                                           `user_id`
-        )
-        REFERENCES `user` (
-                           `user_id`
-            );
-
-ALTER TABLE `post`
-    ADD CONSTRAINT `FK_user_TO_post_1` FOREIGN KEY (
-                                                    `user_id`
-        )
-        REFERENCES `user` (
-                           `user_id`
-            );
-
-ALTER TABLE `post_attraction`
-    ADD CONSTRAINT `FK_attraction_TO_post_attraction_1` FOREIGN KEY (
-                                                                     `attraction_id`
-        )
-        REFERENCES `attraction` (
-                                 `attraction_id`
-            );
-
-ALTER TABLE `post_attraction`
-    ADD CONSTRAINT `FK_post_TO_post_attraction_1` FOREIGN KEY (
-                                                               `post_id`
-        )
-        REFERENCES `post` (
-                           `post_id`
-            );
 

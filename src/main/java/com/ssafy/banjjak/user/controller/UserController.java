@@ -1,5 +1,8 @@
 package com.ssafy.banjjak.user.controller;
 
+import com.ssafy.banjjak.global.BaseException;
+import com.ssafy.banjjak.global.BaseResponse;
+import com.ssafy.banjjak.shorts.model.UserLoginResponseDto;
 import com.ssafy.banjjak.user.model.UserDto;
 import com.ssafy.banjjak.user.service.UserService;
 import com.ssafy.banjjak.util.JWTUtil;
@@ -24,18 +27,14 @@ public class UserController {
     private final JWTUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody UserDto userDto) {
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        log.info("userDto: {}", userDto);
+    public ResponseEntity<BaseResponse<UserLoginResponseDto>> login(@RequestBody UserDto userDto) {
+        Map<String, Object> resultMap = new HashMap<>();
         UserDto loginUser = userService.login(userDto);
-        log.info("loginUser: {}", loginUser);
-        if(loginUser != null) {
-            resultMap.put("access_token", jwtUtil.createAccessToken(loginUser.getUserId()));
-            String refreshToken = jwtUtil.createRefreshToken(loginUser.getUserId());
-            resultMap.put("refresh_token", refreshToken);
-            userService.saveRefreshToken(loginUser.getUserId(), refreshToken);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(resultMap);
+        String accessToken = jwtUtil.createAccessToken(loginUser.getUserId());
+        String refreshToken = jwtUtil.createRefreshToken(loginUser.getUserId());
+        resultMap.put("refreshToken", refreshToken);
+        userService.saveRefreshToken(loginUser.getUserId(), refreshToken);
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("로그인에 성공했습니다.", new UserLoginResponseDto(accessToken, refreshToken)));
     }
 
     @PostMapping("/signup")
@@ -45,15 +44,14 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDto> getUserInfo(@PathVariable Long userId) {
-        log.info("userId: {}", userId);
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserinfo(userId));
+    public ResponseEntity<BaseResponse<UserDto>> getUserInfo(@PathVariable Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("유저 정보를 가져왔습니다.",userService.getUserinfo(userId)));
     }
 
     @GetMapping("/logout/{userId}")
     public ResponseEntity<?> removeToken(@PathVariable ("userId") Long userId) {
         Map<String, Object> resultMap = new HashMap<>();
-        HttpStatus status = HttpStatus.ACCEPTED;
+        HttpStatus status;
         try {
             userService.deleteRefreshToken(userId);
             status = HttpStatus.OK;
@@ -74,14 +72,12 @@ public class UserController {
         if (jwtUtil.checkToken(token)) {
             if (token.equals(userService.getRefreshToken(userDto.getUserId()))) {
                 String accessToken = jwtUtil.createAccessToken(userDto.getUserId());
-                log.debug("token : {}", accessToken);
-                log.debug("정상적으로 액세스토큰 재발급!!!");
-                resultMap.put("access_token", accessToken);
+                resultMap.put("accessToken", accessToken);
                 status = HttpStatus.CREATED;
             }
         } else {
-            log.debug("리프레쉬토큰도 사용불가!!!!!!!");
             status = HttpStatus.UNAUTHORIZED;
+            throw new BaseException(HttpStatus.UNAUTHORIZED.value(), "리프레쉬토큰 사용 불가!");
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }

@@ -20,6 +20,12 @@
         FROM user
     </select>
 
+    <select id="findByUsername" parameterType="string" resultMap="user">
+        SELECT *
+        FROM user
+        WHERE username = #{username}
+    </select>
+
     <select id="findById" parameterType="long" resultMap="user">
         SELECT *
         FROM user

@@ -27,12 +27,12 @@ public class JWTUtil {
 	private long refreshTokenExpireTime;
 
 	public String createAccessToken(Long userId) {
-		return create(userId, "access_token", accessTokenExpireTime);
+		return create(userId, "accessToken", accessTokenExpireTime);
 	}
 
 //	AccessToken에 비해 유효기간을 길게 설정.
 	public String createRefreshToken(Long userId) {
-		return create(userId, "refresh_token", refreshTokenExpireTime);
+		return create(userId, "refreshToken", refreshTokenExpireTime);
 	}
 
 //	Token 발급
@@ -84,7 +84,7 @@ public class JWTUtil {
 		}
 	}
 	
-	public String getUserId(String authorization) {
+	public long getUserId(String authorization) {
 		Jws<Claims> claims;
 		try {
 			claims = Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(authorization);
@@ -94,7 +94,7 @@ public class JWTUtil {
 		}
 		Map<String, Object> value = claims.getBody();
 		log.info("value : {}", value);
-		return (String) value.get("userId");
+		return (long) value.get("userId");
 	}
 
 }

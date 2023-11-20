@@ -1,9 +1,11 @@
 package com.ssafy.banjjak.user.service;
 
+import com.ssafy.banjjak.global.BaseException;
 import com.ssafy.banjjak.user.model.UserDto;
 import com.ssafy.banjjak.user.model.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +22,19 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto login(UserDto userDto) {
-        return userMapper.login(userDto);
+        UserDto loginUser = userMapper.login(userDto);
+        if (loginUser == null){
+            throw new BaseException(HttpStatus.NO_CONTENT.value(), "회원정보가 일치하지 않습니다.");
+        }
+        return loginUser;
     }
 
     @Override
     public void signup(UserDto userDto) {
+        UserDto findUser = userMapper.findByUsername(userDto.getUsername());
+        if(findUser != null){
+            throw new BaseException(HttpStatus.CONFLICT.value(), "이미 있는 유저입니다.");
+        }
         userMapper.save(userDto);
     }
 

@@ -23,6 +23,7 @@ CREATE TABLE `user`
     `nickname`    VARCHAR(255) NULL,
     `name`        VARCHAR(255) NULL,
     `region`      VARCHAR(255) NULL,
+    `refresh_token`      VARCHAR(255) NULL,
     `create_date` TIMESTAMP NULL
 );
 

@@ -11,6 +11,7 @@
         <result column="nickname" property="nickname"/>
         <result column="name" property="name"/>
         <result column="region" property="region"/>
+        <result column="refresh_token" property="refreshToken"/>
         <result column="create_date" property="createDate"/>
     </resultMap>
 
@@ -27,7 +28,7 @@
 
     <insert id="save" parameterType="userDto">
         INSERT INTO user (username, password, nickname,  name, region,create_date)
-        VALUES (#{username}, #{password}, #{nickname}, #{name}, #{region} ,#{createDate})
+        VALUES (#{username}, #{password}, #{nickname}, #{name}, #{region} , NOW())
     </insert>
 
     <update id="update" parameterType="userDto">
@@ -36,8 +37,7 @@
             password = #{password},
             nickname = #{nickname},
             name = #{name},
-            region = #{region},
-            create_time = #{createTime}
+            region = #{region}
         WHERE user_id = #{userId}
     </update>
 
@@ -46,6 +46,29 @@
         WHERE user_id = #{userId}
     </delete>
 
+    <select id="login" parameterType="userDto" resultMap="user">
+        SELECT user_id, username, password, nickname, name, region, create_date
+        FROM user
+        WHERE username = #{username} AND password = #{password}
+    </select>
+
+    <update id="saveRefreshToken" parameterType="map">
+        UPDATE user
+        SET refresh_token = #{token}
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="getRefreshToken" parameterType="long">
+        SELECT refresh_token
+        FROM user
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="deleteRefreshToken" parameterType="map">
+        UPDATE user
+        SET refresh_token = #{token}
+        WHERE user_id = #{userId}
+    </update>
 
 
 

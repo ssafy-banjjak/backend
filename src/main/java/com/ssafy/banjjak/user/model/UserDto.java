@@ -20,4 +20,5 @@ public class UserDto {
     private String name;
     private String region;
     private Timestamp createDate;
+    private String refreshToken;
 }

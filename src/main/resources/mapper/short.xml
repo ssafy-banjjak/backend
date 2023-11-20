@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.banjjak.shorts.model.mapper.ShortMapper">
 
-    <resultMap type="shortDto" id="short" >
+    <resultMap type="shortDto" id="short">
         <result column="short_id" property="shortId"/>
         <result column="user_id" property="userId"/>
         <result column="region" property="region"/>
@@ -29,30 +29,47 @@
     </select>
 
     <insert id="save" parameterType="shortDto">
-        INSERT INTO short (user_id, region, title, content, recruits, dislike, file_path, thumbnail,create_date)
-        VALUES (#{userId}, #{region}, #{title}, #{content}, #{recruits}, #{dislike}, #{filePath}, #{thumbnail},#{createDate})
+        INSERT INTO short (user_id, region, title, content, file_path, thumbnail)
+        VALUES (#{userId}, #{region}, #{title}, #{content}, #{filePath}, #{thumbnail})
     </insert>
 
     <update id="update" parameterType="shortDto">
         UPDATE short
-        SET user_id = #{userId},
-            region = #{region},
-            title = #{title},
-            content = #{content},
-            recruits = #{recruits},
-            dislike = #{dislike},
-            file_path = #{filePath},
-            thumbnail = #{thumbnail},
+        SET user_id     = #{userId},
+            region      = #{region},
+            title       = #{title},
+            content     = #{content},
+            like    = #{like},
+            dislike     = #{dislike},
+            file_path   = #{filePath},
+            thumbnail   = #{thumbnail},
             create_time = #{createTime}
         WHERE short_id = #{shortId}
     </update>
 
     <delete id="deleteById" parameterType="long">
-        DELETE FROM short
+        DELETE
+        FROM short
         WHERE short_id = #{shortId}
     </delete>
 
+    <sql id="search">
+        <if test="userId != null">
+                and user_id = #{userId}
+        </if>
+        <if test="region != null and region != ''">
+                and region = #{region}
+            </if>
+    </sql>
 
+
+    <select id="findAllWithSearchCond" resultType="list" resultMap="short" parameterType="searchCond">
+        SELECT *
+        FROM short
+        WHERE 1=1
+        <include refid="search"></include>
+        LIMIT #{pageNo}, #{amount}
+    </select>
 
 
 </mapper>

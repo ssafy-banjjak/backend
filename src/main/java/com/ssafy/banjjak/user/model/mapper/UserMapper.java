@@ -15,6 +15,7 @@ public interface UserMapper {
     void deleteById(Long userId);
     //----기본 crud----
     UserDto login(UserDto userDto);
+    UserDto findByUsername(String username);
     void saveRefreshToken(Map<String, Object> map);
     String getRefreshToken(Long userId);
     void deleteRefreshToken(Map<String, Object> map);

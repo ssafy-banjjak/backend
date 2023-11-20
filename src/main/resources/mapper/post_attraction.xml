@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.banjjak.post_attraction.model.mapper.PostAttractionMapper">
+
+    <resultMap type="postAttractionDto" id="post_attraction" >
+        <result column="post_attraction_id" property="postAttractionId"/>
+        <result column="attraction_id" property="attractionId"/>
+        <result column="post_id" property="postId"/>
+    </resultMap>
+
+    <select id="findAll" resultType="list" resultMap="post_attraction">
+        SELECT *
+        FROM post_attraction
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="post_attraction">
+        SELECT *
+        FROM post_attraction
+        WHERE post_attraction_id = #{postAttractionId}
+    </select>
+
+    <insert id="save" parameterType="postAttractionDto">
+        INSERT INTO post_attraction (user_id, post_id)
+        VALUES (#{userId}, #{postId})
+    </insert>
+
+    <update id="update" parameterType="postDto">
+        UPDATE post_attraction
+        SET user_id = #{userId},
+            post_id = #{postId}
+        WHERE post_attraction_id = #{postAttractionId}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM post_attraction
+        WHERE post_attraction_id = #{postAttractionId}
+    </delete>
+
+
+
+
+</mapper>

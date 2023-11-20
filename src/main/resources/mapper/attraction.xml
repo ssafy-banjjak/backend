@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.banjjak.attraction.model.mapper.AttractionMapper">
+
+    <resultMap type="attractionDto" id="attraction" >
+        <result column="attraction_id" property="attractionId"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="type" property="type"/>
+        <result column="image" property="image"/>
+        <result column="tel" property="tel"/>
+    </resultMap>
+
+    <select id="findAll" resultType="list" resultMap="attraction">
+        SELECT *
+        FROM attraction
+    </select>
+
+    <select id="findById" parameterType="long" resultMap="attraction">
+        SELECT *
+        FROM attraction
+        WHERE attraction_id = #{attractionId}
+    </select>
+
+    <insert id="save" parameterType="attractionDto">
+        INSERT INTO attraction (region, name, description, latitude, longitude, type, image, tel)
+        VALUES (#{region}, #{name}, #{description}, #{latitude}, #{longitude}, #{type}, #{image}, #{tel})
+    </insert>
+
+    <update id="update" parameterType="attractionDto">
+        UPDATE attraction
+        SET region = #{region},
+            name = #{name},
+            description = #{description},
+            latitude = #{latitude},
+            longitude = #{longitude},
+            type = #{type},
+            image = #{image},
+            tel = #{tel}
+        WHERE attraction_id = #{attractionId}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM attraction
+        WHERE attraction_id = #{attractionId}
+    </delete>
+
+
+
+
+</mapper>

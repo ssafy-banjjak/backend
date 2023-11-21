@@ -71,5 +71,17 @@
         LIMIT #{pageNo}, #{amount}
     </select>
 
+    <update id="updateLike" parameterType="long">
+        UPDATE short
+        SET short.like = short.like+1
+        WHERE short_id = ${shortId}
+    </update>
+
+    <update id="updateDislike" parameterType="long">
+        UPDATE short
+        SET short.dislike = short.dislike+1
+        WHERE short_id = ${shortId}
+    </update>
+
 
 </mapper>

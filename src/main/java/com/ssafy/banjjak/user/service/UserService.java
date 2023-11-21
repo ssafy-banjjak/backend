@@ -1,6 +1,6 @@
 package com.ssafy.banjjak.user.service;
 
-import com.ssafy.banjjak.shorts.model.UserLoginResponseDto;
+import com.ssafy.banjjak.user.model.UserLoginResponseDto;
 import com.ssafy.banjjak.user.model.UserDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,5 +13,4 @@ public interface UserService {
     String getRefreshToken(Long userId);
     void deleteRefreshToken(Long userId);
     UserLoginResponseDto reissue(Long userId, HttpServletRequest request);
-
 }

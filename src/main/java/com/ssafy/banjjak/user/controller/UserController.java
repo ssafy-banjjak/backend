@@ -1,8 +1,7 @@
 package com.ssafy.banjjak.user.controller;
 
-import com.ssafy.banjjak.global.BaseException;
 import com.ssafy.banjjak.global.BaseResponse;
-import com.ssafy.banjjak.shorts.model.UserLoginResponseDto;
+import com.ssafy.banjjak.user.model.UserLoginResponseDto;
 import com.ssafy.banjjak.user.model.UserDto;
 import com.ssafy.banjjak.user.service.UserService;
 import com.ssafy.banjjak.util.JWTUtil;
@@ -13,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @Slf4j

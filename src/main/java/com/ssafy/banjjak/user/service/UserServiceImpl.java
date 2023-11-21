@@ -1,7 +1,7 @@
 package com.ssafy.banjjak.user.service;
 
 import com.ssafy.banjjak.global.BaseException;
-import com.ssafy.banjjak.shorts.model.UserLoginResponseDto;
+import com.ssafy.banjjak.user.model.UserLoginResponseDto;
 import com.ssafy.banjjak.user.model.UserDto;
 import com.ssafy.banjjak.user.model.mapper.UserMapper;
 import com.ssafy.banjjak.util.JWTUtil;
@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService{
     @Override
     public void saveRefreshToken(Long userId, String refreshToken) {
         Map<String, Object> map = new HashMap<String, Object>();
-        log.info("userId: {}", userId);
         map.put("userId", userId);
         map.put("token", refreshToken);
         userMapper.saveRefreshToken(map);

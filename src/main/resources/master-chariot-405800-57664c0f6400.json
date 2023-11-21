@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "master-chariot-405800",
+  "private_key_id": "57664c0f6400d6c0842aa3a04bfd80a4394564e6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC6t6GIJUtfkUqq\nvWej56mVci2dzzpKtkgWB7+ebFvzYUFVaW4q2cYdhe3ZH7K0a8S0Ru+0XsaHFQL6\nqdh881QzENN17Yg43wBcpQCOdF5hncMkOYaAsSnuXFO6xq2N1XgiJ6qTlrDMRTIg\neKC8MZ0n6fDzwHj7WRTW1vaUoA6j82zR3Km3zNIj/XjSMNoU7XlOycSoytU81dbJ\nn7tlaPtpUL8/U1LJlsCrux3ZQ7SJmeeqn6ABYOGANh+Te9+lkxKYMe/HONGy8Y4Y\nwUeN+OQO7GrD+5a75mqTkyRollcappfFO4oM00RyTeWzfskNKTqPGN16FIdQRXMW\nbPrXLUbDAgMBAAECggEAUa7s6TEbkMLwjdJPaUp7C2iIYT3bi/zDe3PHVeikr0vw\nN4voiLF9tMO3AmIWHUz6ID3aNqexpT3BcGRmU39l6fMl9zTDf9G7CEyc+jUZZw4L\n5SiPWXRn2iGk9ZReL6rgI90DiA6H6M0quT7cXog77s6uvQwKQTc+4R/ofquoy/r9\nAf9zbuWnFtdv2RI8J5BEla70sVHGWT1BbKQr3V1DUk9E3EkeEGmjlbENnBTfGWdS\n332B38/zAS52vtpXutrc6oJKYXqJag3itZ/MOkszf6cfnB8Mowy8ITeNNtTx5sNX\n1TpmUY9J302HIspV/RUtvbg36XD8C1KTgz5C7yKqCQKBgQD2v9fuVtgf89doH+Tj\nbC93cbNEPxALovXgT8B0hFtkxsFpg2OgUov5FMwAI6E6ZesF+NtlpHDVWKrv26d7\nHpX2Rmi1f8yO8tV354A0R/0QeQj7xJJMptwfz4jtXkZEvpKKKzwVBIgysm/DOZ4O\n3GiaLKDDzdfSr24hKSI9R0eXCQKBgQDBt6J5E9gJ1eg5uIq2+8dL71WCrthb5hZ1\nsGIS5yHzDerZ/95fJduDiLIJ6sapEWWrgpvetB9VNMtvmj85MocyHvE3o1f3S3Zp\nFcVDGLNh8moboSny7e6h/CzWhLcPxv82PvNrnx38us5Li/x2fuOTioeWJq6VCyUK\nM5nppUt2awKBgC6t0D2odC5nRMLP9c8IMlqYSd+JRpHM/FK5A6GHQHrqFsDNOFWm\nCBDQ3F7SXrfbfACfOXIbD7VslrnVhfOGr7vtSfW7/Yi1a6jJRLmfPMKXAxoN79dM\nYawq6K5u/UAYBUTaNP2M4+8jTn1SMxKAo9E2zBr+n+udgGoJjA6no2VxAoGAJ0At\nFHlX2c5UynVA7gif/hvVaLBCuIQrYtdFV+0rLNNSFa/Jf9/s1X76DBZdAF69Cf5h\n1MMMYjhbTBal3tIFILuyRoK7TSkmKe62VH0Jw7vZkhWaqVVad8nfz+t+KB07EuO4\ncMMB0XaMXDRWCDB3ripwhJT75MkoTSPdeMD8RFcCgYBnL7GJoHY8VpiPm60yeXoE\nlOzAGVybl6G/p3F/9xLs8PUOKWcTGH5Bh4vHNsx0Hp8wNCV3SBTCa3UHdhvw4Jkv\nh4WJ6ODxzKVyjyVz37n58nZpxI08nDzH757hVmfjdAOQ2zZD7wMD0mUf8ou7T7xX\nPfo7viO1DD+Mlt/FZheTDA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "banjjak@master-chariot-405800.iam.gserviceaccount.com",
+  "client_id": "115802947920057353627",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/banjjak%40master-chariot-405800.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

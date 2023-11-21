@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<BaseErrorResponse> handleException(Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL SERVER ERROR"));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new BaseErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
     }
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<BaseErrorResponse> handleBaseException(BaseException e) {

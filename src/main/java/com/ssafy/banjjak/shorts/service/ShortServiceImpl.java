@@ -46,6 +46,16 @@ public class ShortServiceImpl implements ShortService {
         shortMapper.save(shortDto);
     }
 
+    @Override
+    public void updateLike(Long shortId) {
+        shortMapper.updateLike(shortId);
+    }
+
+    @Override
+    public void updateDislike(Long shortId) {
+        shortMapper.updateDislike(shortId);
+    }
+
     public String uploadFileToGCS(MultipartFile multipartFile) throws IOException {
         String uuid = UUID.randomUUID().toString(); // Google Cloud Storage에 저장될 파일 이름
         String ext = multipartFile.getContentType();

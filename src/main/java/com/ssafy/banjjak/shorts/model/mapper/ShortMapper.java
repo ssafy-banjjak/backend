@@ -16,4 +16,7 @@ public interface  ShortMapper {
     void update(ShortDto shortDto);
     void deleteById(Long shortId);
     List<ShortDto> findAllWithSearchCond(SearchCond searchCond);
+
+    void updateLike(Long shortId);
+    void updateDislike(Long shortId);
 }

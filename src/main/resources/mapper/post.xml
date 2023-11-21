@@ -16,22 +16,6 @@
         <result column="create_date" property="createDate"/>
     </resultMap>
 
-    <select id="findAll" resultType="list" resultMap="post">
-        SELECT *
-        FROM post
-    </select>
-
-    <select id="findById" parameterType="long" resultMap="post">
-        SELECT *
-        FROM post
-        WHERE post_id = #{postId}
-    </select>
-
-    <insert id="save" parameterType="postDto">
-        INSERT INTO post (user_id, region, title, content, recruits, date_time, place, create_date)
-        VALUES (#{userId}, #{region}, #{title}, #{content}, #{recruits}, #{dateTime}, #{place}, #{createDate})
-    </insert>
-
     <update id="update" parameterType="postDto">
         UPDATE post
         SET user_id = #{userId},
@@ -50,7 +34,22 @@
         WHERE post_id = #{postId}
     </delete>
 
+    <!-- CRUD-->
 
+    <insert id="writePost" parameterType="postDto" useGeneratedKeys="true" keyProperty="postId" keyColumn="post_id">
+        INSERT INTO post (user_id, region, title, content, recruits, date_time, place)
+        VALUES (#{userId}, #{region}, #{title}, #{content}, #{recruits}, #{dateTime}, #{place})
+    </insert>
 
+    <select id="listPost" resultType="list" resultMap="post">
+        SELECT *
+        FROM post
+    </select>
+
+    <select id="detailPost" parameterType="long" resultMap="post">
+        SELECT *
+        FROM post
+        WHERE post_id = #{postId}
+    </select>
 
 </mapper>

@@ -13,4 +13,6 @@ public interface PostUserMapper {
     void save(PostUserDto postUserDto);
     void update(PostUserDto postUserDto);
     void deleteById(Long postUserId);
+
+    List<PostUserDto> getPostUser(Long postId);
 }

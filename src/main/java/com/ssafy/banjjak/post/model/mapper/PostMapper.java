@@ -10,7 +10,13 @@ import java.util.List;
 public interface PostMapper {
     PostDto findById(Long postId);
     List<PostDto> findAll();
-    void save(PostDto attractionDto);
+
+    // 글쓰기
+    void writePost(PostDto postDto);
     void update(PostDto attractionDto);
     void deleteById(Long postId);
+
+    List<PostDto> listPost();
+
+    PostDto detailPost(Long postId);
 }

@@ -5,15 +5,10 @@
 <mapper namespace="com.ssafy.banjjak.post_user.model.mapper.PostUserMapper">
 
     <resultMap type="postUserDto" id="post_user" >
-        <result column="post_user_id" property="postAttractionId"/>
+        <result column="post_user_id" property="postUserId"/>
         <result column="user_id" property="userId"/>
         <result column="post_id" property="postId"/>
     </resultMap>
-
-    <select id="findAll" resultType="list" resultMap="post_user">
-        SELECT *
-        FROM post_user
-    </select>
 
     <select id="findById" parameterType="long" resultMap="post_user">
         SELECT *
@@ -38,7 +33,11 @@
         WHERE post_user_id = #{postUserId}
     </delete>
 
-
-
+    <!--  CRUD  -->
+    <select id="getPostUser" parameterType="long" resultType="list" resultMap="post_user">
+        SELECT *
+        FROM post_user
+        WHERE post_id = #{postId}
+    </select>
 
 </mapper>

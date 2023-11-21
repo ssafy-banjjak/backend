@@ -13,12 +13,12 @@ import java.sql.Timestamp;
 @ToString
 public class PostDto {
 
-    private Long attractionId;
+    private Long postId;
     private Long userId;
     private String region;
     private String title;
     private String content;
-    private Double recruits;
+    private int recruits;
     private Timestamp dateTime;
     private String place;
     private Timestamp createDate;

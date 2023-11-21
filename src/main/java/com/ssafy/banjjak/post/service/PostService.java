@@ -7,7 +7,7 @@ import com.ssafy.banjjak.post.model.PostWrtieDto;
 import java.util.List;
 
 public interface PostService {
-    List<PostDto> listPost();
+    List<PostDetailDto> listPost();
 
     void writePost(PostWrtieDto postWrtieDto);
 

@@ -18,11 +18,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/post")
 @RequiredArgsConstructor
+@CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.POST} , maxAge = 6000)
 public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<BaseResponse<List<PostDto>>> listPost(){
+    public ResponseEntity<BaseResponse<List<PostDetailDto>>> listPost(){
         return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("글 목록을 가져왔습니다.", postService.listPost()));
     }
 
@@ -32,10 +33,8 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-
     @GetMapping("/{postId}")
     public ResponseEntity<BaseResponse<PostDetailDto>> detailPost(@PathVariable("postId") Long postId){
-        log.debug("asd");
         PostDetailDto postDetailDto = null;
         try {
             postDetailDto = postService.detailPost(postId);

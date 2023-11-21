@@ -26,7 +26,7 @@ public class PostServiceImpl implements PostService{
     private final PostUserMapper postUserMapper;
 
     @Override
-    public List<PostDto> listPost() {
+    public List<PostDetailDto> listPost() {
         return postMapper.listPost();
     }
 
@@ -45,12 +45,10 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public PostDetailDto detailPost(Long postId) throws Exception {
-        PostDto postDto = postMapper.detailPost(postId);
+        PostDetailDto postDetailDto = postMapper.detailPost(postId);
         List<AttractionDto> attractionDtoList = postAttractionMapper.getAttraction(postId);
         List<PostUserDto> postUserDtoList = postUserMapper.getPostUser(postId);
 
-        PostDetailDto postDetailDto = new PostDetailDto();
-        postDetailDto.setPostDto(postDto);
         postDetailDto.setAttractionDtoList(attractionDtoList);
         postDetailDto.setPeopleCnt(postUserDtoList.size());
 

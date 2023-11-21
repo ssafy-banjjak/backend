@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Getter
@@ -14,7 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class PostDetailDto {
-    private PostDto postDto;
+    private Long postId;
+    private Long userId;
+    private String region;
+    private String title;
+    private String content;
+    private int recruits;
+    private Timestamp dateTime;
+    private Timestamp createDate;
+    private String username;
     private List<AttractionDto> attractionDtoList;
     private int peopleCnt;
 }

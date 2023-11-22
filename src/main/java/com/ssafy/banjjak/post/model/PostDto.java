@@ -18,7 +18,7 @@ public class PostDto {
     private String region;
     private String title;
     private String content;
-    private Double recruits;
+    private Integer recruits;
     private Timestamp dateTime;
     private String place;
     private Timestamp createDate;

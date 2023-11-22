@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/short")
 @RequiredArgsConstructor
+@CrossOrigin
 public class ShortController {
 
     private final ShortService shortService;
@@ -27,6 +28,12 @@ public class ShortController {
     @GetMapping
     public ResponseEntity<BaseResponse<List<ShortDto>>> findBySearchCond(@ModelAttribute SearchCond searchCond) {
         return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("short를 가져왔습니다.", shortService.findBySearchCond(searchCond)));
+    }
+
+    @ApiOperation(value = "반짝 가져오기")
+    @GetMapping("/{shortId}")
+    public ResponseEntity<BaseResponse<ShortDto>> findByShortId(@PathVariable Long shortId) {
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("shortid를 가져왔습니다.", shortService.findByShortId(shortId)));
     }
 
     @ApiOperation(value = "반짝 등록하기")

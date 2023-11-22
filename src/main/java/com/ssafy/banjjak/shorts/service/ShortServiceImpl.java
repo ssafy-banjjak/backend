@@ -32,6 +32,11 @@ public class ShortServiceImpl implements ShortService {
     }
 
     @Override
+    public ShortDto findByShortId(Long shortId) {
+        return shortMapper.findById(shortId);
+    }
+
+    @Override
     public void createShort(ShortFile shortFile) throws IOException {
         String thumbnail = uploadFileToGCS(shortFile.getImage());
         String filePath = uploadFileToGCS(shortFile.getVideo());

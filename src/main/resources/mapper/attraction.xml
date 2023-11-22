@@ -50,6 +50,29 @@
     </delete>
 
 
+    <!--  CRUD  -->
+    <select id="listAttraction" parameterType="map" resultType="list" resultMap="attraction" >
+        SELECT *
+        FROM attraction
+        <if test="region != null and region != ''">
+            WHERE region = #{region}
+        </if>
+    </select>
 
+    <select id="searchAttraction" parameterType="map" resultType="list" resultMap="attraction">
+        SELECT *
+        FROM attraction a, attraction b
+        WHERE a.attraction_id = b.attraction_id
+        <include refid="search"></include>
+    </select>
+    
+    <sql id="search">
+        <if test="word != null and word != ''">
+            AND a.name like concat('%', #{word}, '%')
+        </if>
+        <if test="region != null and region != ''">
+            AND a.region = #{region}
+        </if>
+    </sql>
 
 </mapper>

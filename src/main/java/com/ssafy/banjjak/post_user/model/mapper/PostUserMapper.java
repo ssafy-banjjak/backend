@@ -15,4 +15,6 @@ public interface PostUserMapper {
     void deleteById(Long postUserId);
 
     List<PostUserDto> getPostUser(Long postId);
+
+    void joinPost(PostUserDto postUserDto);
 }

@@ -16,11 +16,6 @@
         WHERE post_user_id = #{postUserId}
     </select>
 
-    <insert id="save" parameterType="postUserDto">
-        INSERT INTO post_user (user_id, post_id)
-        VALUES (#{userId}, #{postId})
-    </insert>
-
     <update id="update" parameterType="postDto">
         UPDATE post_user
         SET user_id = #{userId},
@@ -34,10 +29,16 @@
     </delete>
 
     <!--  CRUD  -->
+
     <select id="getPostUser" parameterType="long" resultType="list" resultMap="post_user">
         SELECT *
         FROM post_user
         WHERE post_id = #{postId}
     </select>
+
+    <insert id="joinPost" parameterType="postUserDto">
+        INSERT INTO post_user(user_id, post_id)
+        VALUES (#{userId}, #{postId})
+    </insert>
 
 </mapper>

@@ -14,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -26,8 +28,11 @@ public class PostServiceImpl implements PostService{
     private final PostUserMapper postUserMapper;
 
     @Override
-    public List<PostDetailDto> listPost() {
-        return postMapper.listPost();
+    public List<PostDetailDto> listPost(Map<String, String> map) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("region", map.get("region") == null ? "" : map.get("region"));
+        param.put("word", map.get("word") == null ? "" : map.get("word"));
+        return postMapper.listPost(param);
     }
 
     @Override

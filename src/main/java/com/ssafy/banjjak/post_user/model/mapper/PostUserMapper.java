@@ -19,9 +19,12 @@ public interface PostUserMapper {
     List<PostUserDto> getPostUser(Long postId);
 
     void joinPost(PostUserDto postUserDto);
+    void unJoinPost(PostUserDto postUserDto);
 
     // 유저 번호로 유저가 가입한 글 번호 목록 가져오기
     List<Long> userPostList(Long userId);
 
     PostDetailDto joinList(Long postId);
+
+    int canJoinPost(PostUserDto postUserDto);
 }

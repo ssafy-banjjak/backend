@@ -53,6 +53,12 @@
         VALUES (#{userId}, #{postId})
     </insert>
 
+    <delete id="unJoinPost" parameterType="postUserDto">
+        DELETE FROM post_user
+        WHERE post_id = #{postId}
+        AND user_id = #{userId}
+    </delete>
+
     <select id="userPostList" parameterType="long" resultType="long">
         SELECT post_id
         FROM post_user
@@ -66,4 +72,10 @@
         WHERE p.post_id = #{postId}
     </select>
 
+    <select id="canJoinPost" parameterType="postUserDto" resultType="_int">
+        SELECT COUNT(post_user_id)
+        FROM post_user
+        WHERE post_id = #{postId}
+        AND user_id = #{userId}
+    </select>
 </mapper>

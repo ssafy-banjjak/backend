@@ -25,6 +25,11 @@ public class PostUserServiceImpl implements PostUserService{
     }
 
     @Override
+    public void unJoinPost(PostUserDto postUserDto) {
+        postUserMapper.unJoinPost(postUserDto);
+    }
+
+    @Override
     public List<PostDetailDto> joinList(Long userId) {
         List<Long> postIdList = postUserMapper.userPostList(userId);
         List<PostDetailDto> list = new ArrayList<>();
@@ -33,5 +38,10 @@ public class PostUserServiceImpl implements PostUserService{
             list.add(postUserMapper.joinList(postId));
         }
         return list;
+    }
+
+    @Override
+    public int canJoinPost(PostUserDto postUserDto) {
+        return postUserMapper.canJoinPost(postUserDto);
     }
 }

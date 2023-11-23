@@ -22,6 +22,7 @@ public class PostDetailDto {
     private String dateTime;
     private String createDate;
     private String username;
+    private String nickname;
     private List<AttractionDto> attractionDtoList;
     private int peopleCnt;
 }

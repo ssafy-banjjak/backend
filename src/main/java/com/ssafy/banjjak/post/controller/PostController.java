@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -23,8 +24,8 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseEntity<BaseResponse<List<PostDetailDto>>> listPost(){
-        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("글 목록을 가져왔습니다.", postService.listPost()));
+    public ResponseEntity<BaseResponse<List<PostDetailDto>>> listPost(@RequestParam Map<String, String> map){
+        return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("글 목록을 가져왔습니다.", postService.listPost(map)));
     }
 
     @PostMapping

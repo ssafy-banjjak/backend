@@ -39,11 +39,6 @@
         WHERE post_id = #{postId}
     </update>
 
-    <delete id="deleteById" parameterType="long">
-        DELETE FROM post
-        WHERE post_id = #{postId}
-    </delete>
-
     <!-- CRUD-->
 
     <insert id="writePost" parameterType="postDto" useGeneratedKeys="true" keyProperty="postId" keyColumn="post_id">
@@ -63,5 +58,10 @@
         JOIN user u ON p.user_id = u.user_id
         WHERE post_id = #{postId};
     </select>
+
+    <delete id="deletePost" parameterType="long">
+        DELETE FROM post
+        WHERE post_id = #{postId}
+    </delete>
 
 </mapper>

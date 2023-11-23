@@ -19,6 +19,6 @@ public class PostDto {
     private String title;
     private String content;
     private int recruits;
-    private Timestamp dateTime;
-    private Timestamp createDate;
+    private String dateTime;
+    private String createDate;
 }

@@ -20,4 +20,6 @@ public interface PostMapper {
     List<PostDetailDto> listPost();
 
     PostDetailDto detailPost(Long postId);
+
+    void deletePost(Long postId);
 }

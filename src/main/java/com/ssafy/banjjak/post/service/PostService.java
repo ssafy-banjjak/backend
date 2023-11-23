@@ -12,4 +12,6 @@ public interface PostService {
     void writePost(PostWrtieDto postWrtieDto);
 
     PostDetailDto detailPost(Long postId) throws Exception;
+
+    void deletePost(Long postId);
 }

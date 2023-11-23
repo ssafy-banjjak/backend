@@ -55,4 +55,9 @@ public class PostServiceImpl implements PostService{
         return postDetailDto;
     }
 
+    @Override
+    public void deletePost(Long postId) {
+        postMapper.deletePost(postId);
+    }
+
 }

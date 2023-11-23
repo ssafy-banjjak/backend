@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/post")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.POST} , maxAge = 6000)
+@CrossOrigin(origins = { "*" }, methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE} , maxAge = 6000)
 public class PostController {
     private final PostService postService;
 
@@ -43,5 +43,11 @@ public class PostController {
             throw new BaseException(HttpStatus.BAD_REQUEST.value(), "오류!");
         }
         return ResponseEntity.status(HttpStatus.OK).body(new BaseResponse<>("글 정보를 가져왔습니다.", postDetailDto));
+    }
+
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<BaseResponse<?>> deletePost(@PathVariable("postId") Long postId){
+        postService.deletePost(postId);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

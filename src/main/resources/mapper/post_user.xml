@@ -10,6 +10,18 @@
         <result column="post_id" property="postId"/>
     </resultMap>
 
+    <resultMap type="postDetailDto" id="postDetail">
+        <result column="post_id" property="postId"/>
+        <result column="user_id" property="userId"/>
+        <result column="region" property="region"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="recruits" property="recruits"/>
+        <result column="date_time" property="dateTime"/>
+        <result column="create_date" property="createDate"/>
+        <result column="username" property="username"/>
+    </resultMap>
+
     <select id="findById" parameterType="long" resultMap="post_user">
         SELECT *
         FROM post_user
@@ -40,5 +52,18 @@
         INSERT INTO post_user(user_id, post_id)
         VALUES (#{userId}, #{postId})
     </insert>
+
+    <select id="userPostList" parameterType="long" resultType="long">
+        SELECT post_id
+        FROM post_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="joinList" parameterType="long" resultMap="postDetail">
+        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username
+        FROM post p
+        JOIN user u ON p.user_id = u.user_id
+        WHERE p.post_id = #{postId}
+    </select>
 
 </mapper>

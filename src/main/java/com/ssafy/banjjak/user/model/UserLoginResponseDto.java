@@ -1,4 +1,4 @@
-package com.ssafy.banjjak.shorts.model;
+package com.ssafy.banjjak.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,16 +1,14 @@
 package com.ssafy.banjjak.shorts.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@ToString
+@AllArgsConstructor
 public class ShortDto {
 
     private Long shortId;

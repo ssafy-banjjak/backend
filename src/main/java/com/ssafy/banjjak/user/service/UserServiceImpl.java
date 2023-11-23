@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
         map.put("userId", userDto.getUserId());
         map.put("token", refreshToken);
         userMapper.saveRefreshToken(map);
-        return new UserLoginResponseDto(accessToken, refreshToken);
+        return new UserLoginResponseDto(findUser.getUserId(), accessToken, refreshToken);
     }
 
     @Override
@@ -81,6 +81,6 @@ public class UserServiceImpl implements UserService{
         if (!jwtUtil.checkToken(token) || !token.equals(userMapper.getRefreshToken(userId))) {
             throw new BaseException(HttpStatus.UNAUTHORIZED.value(), "잘못된 토큰입니다.");
         }
-        return new UserLoginResponseDto(jwtUtil.createAccessToken(userId), jwtUtil.createRefreshToken(userId));
+        return new UserLoginResponseDto(userId, jwtUtil.createAccessToken(userId), jwtUtil.createRefreshToken(userId));
     }
 }

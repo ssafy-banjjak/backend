@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserLoginResponseDto login(UserDto userDto) {
-        UserDto findUser = userMapper.findByUsername(userDto.getUsername());
+        UserDto findUser = userMapper.login(userDto);
         if (findUser == null){
             throw new BaseException(HttpStatus.NO_CONTENT.value(), "회원정보가 일치하지 않습니다.");
         }

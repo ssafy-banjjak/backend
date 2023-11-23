@@ -10,6 +10,17 @@
         <result column="post_id" property="postId"/>
     </resultMap>
 
+    <resultMap type="attractionDto" id="attraction" >
+        <result column="attraction_id" property="attractionId"/>
+        <result column="name" property="name"/>
+        <result column="address" property="address"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+        <result column="type" property="type"/>
+        <result column="image" property="image"/>
+        <result column="tel" property="tel"/>
+    </resultMap>
+
     <select id="findAll" resultType="list" resultMap="post_attraction">
         SELECT *
         FROM post_attraction
@@ -39,6 +50,22 @@
     </delete>
 
 
+    <!--  CRUD  -->
+
+    <insert id="writeAttraction" parameterType="java.util.List">
+        INSERT INTO post_attraction (attraction_id, post_id)
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=", ">
+            (#{item.attractionId}, #{item.postId})
+        </foreach>
+    </insert>
+
+    <select id="getAttraction" parameterType="long" resultType="list" resultMap="attraction">
+        SELECT a.attraction_id, a.name, a.address, a.latitude, a.longitude, a.type, a.image, a.tel
+        FROM post_attraction p
+        JOIN attraction a ON p.attraction_id = a.attraction_id
+        WHERE p.post_id = #{postId}
+    </select>
 
 
 </mapper>

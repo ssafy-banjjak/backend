@@ -7,7 +7,7 @@
     <resultMap type="attractionDto" id="attraction" >
         <result column="attraction_id" property="attractionId"/>
         <result column="name" property="name"/>
-        <result column="description" property="description"/>
+        <result column="address" property="address"/>
         <result column="latitude" property="latitude"/>
         <result column="longitude" property="longitude"/>
         <result column="type" property="type"/>
@@ -27,15 +27,15 @@
     </select>
 
     <insert id="save" parameterType="attractionDto">
-        INSERT INTO attraction (region, name, description, latitude, longitude, type, image, tel)
-        VALUES (#{region}, #{name}, #{description}, #{latitude}, #{longitude}, #{type}, #{image}, #{tel})
+        INSERT INTO attraction (region, name, address, latitude, longitude, type, image, tel)
+        VALUES (#{region}, #{name}, #{address}, #{latitude}, #{longitude}, #{type}, #{image}, #{tel})
     </insert>
 
     <update id="update" parameterType="attractionDto">
         UPDATE attraction
         SET region = #{region},
             name = #{name},
-            description = #{description},
+            address = #{address},
             latitude = #{latitude},
             longitude = #{longitude},
             type = #{type},
@@ -50,6 +50,29 @@
     </delete>
 
 
+    <!--  CRUD  -->
+    <select id="listAttraction" parameterType="map" resultType="list" resultMap="attraction" >
+        SELECT *
+        FROM attraction
+        <if test="region != null and region != ''">
+            WHERE region = #{region}
+        </if>
+    </select>
 
+    <select id="searchAttraction" parameterType="map" resultType="list" resultMap="attraction">
+        SELECT *
+        FROM attraction a, attraction b
+        WHERE a.attraction_id = b.attraction_id
+        <include refid="search"></include>
+    </select>
+    
+    <sql id="search">
+        <if test="word != null and word != ''">
+            AND a.name like concat('%', #{word}, '%')
+        </if>
+        <if test="region != null and region != ''">
+            AND a.region = #{region}
+        </if>
+    </sql>
 
 </mapper>

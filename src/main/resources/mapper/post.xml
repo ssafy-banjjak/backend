@@ -25,6 +25,7 @@
         <result column="date_time" property="dateTime"/>
         <result column="create_date" property="createDate"/>
         <result column="username" property="username"/>
+        <result column="nickname" property="nickname"/>
     </resultMap>
 
     <update id="update" parameterType="postDto">
@@ -47,13 +48,14 @@
     </insert>
 
     <select id="listPost" resultType="list" resultMap="postDetail">
-        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username
-        FROM post p
-        JOIN user u ON p.user_id = u.user_id;
+        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username, u.nickname
+        FROM post p, user u
+        WHERE p.user_id = u.user_id
+        <include refid="search"></include>
     </select>
 
     <select id="detailPost" parameterType="long" resultMap="postDetail">
-        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username
+        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username, u.nickname
         FROM post p
         JOIN user u ON p.user_id = u.user_id
         WHERE post_id = #{postId};
@@ -63,5 +65,14 @@
         DELETE FROM post
         WHERE post_id = #{postId}
     </delete>
+
+    <sql id="search">
+        <if test="word != null and word != ''">
+            AND p.title like concat('%', #{word}, '%')
+        </if>
+        <if test="region != null and region != ''">
+            AND p.region = #{region}
+        </if>
+    </sql>
 
 </mapper>

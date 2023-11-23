@@ -5,6 +5,7 @@ import com.ssafy.banjjak.post.model.PostDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 
@@ -17,7 +18,7 @@ public interface PostMapper {
     void update(PostDto attractionDto);
     void deleteById(Long postId);
 
-    List<PostDetailDto> listPost();
+    List<PostDetailDto> listPost(Map<String, Object> param);
 
     PostDetailDto detailPost(Long postId);
 

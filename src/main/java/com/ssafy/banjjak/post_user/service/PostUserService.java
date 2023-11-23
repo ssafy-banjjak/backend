@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface PostUserService {
     void joinPost(PostUserDto postUserDto);
+    void unJoinPost(PostUserDto postUserDto);
 
     List<PostDetailDto> joinList(Long userId);
+
+    int canJoinPost(PostUserDto postUserDto);
 }

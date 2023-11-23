@@ -12,25 +12,20 @@
         <result column="content" property="content"/>
         <result column="recruits" property="recruits"/>
         <result column="date_time" property="dateTime"/>
-        <result column="place" property="place"/>
         <result column="create_date" property="createDate"/>
     </resultMap>
 
-    <select id="findAll" resultType="list" resultMap="post">
-        SELECT *
-        FROM post
-    </select>
-
-    <select id="findById" parameterType="long" resultMap="post">
-        SELECT *
-        FROM post
-        WHERE post_id = #{postId}
-    </select>
-
-    <insert id="save" parameterType="postDto">
-        INSERT INTO post (user_id, region, title, content, recruits, date_time, place, create_date)
-        VALUES (#{userId}, #{region}, #{title}, #{content}, #{recruits}, #{dateTime}, #{place}, #{createDate})
-    </insert>
+    <resultMap type="postDetailDto" id="postDetail" >
+        <result column="post_id" property="postId"/>
+        <result column="user_id" property="userId"/>
+        <result column="region" property="region"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="recruits" property="recruits"/>
+        <result column="date_time" property="dateTime"/>
+        <result column="create_date" property="createDate"/>
+        <result column="username" property="username"/>
+    </resultMap>
 
     <update id="update" parameterType="postDto">
         UPDATE post
@@ -40,17 +35,33 @@
             content = #{content},
             recruits = #{recruits},
             date_time = #{dateTime},
-            place = #{place},
             create_time = #{createTime}
         WHERE post_id = #{postId}
     </update>
 
-    <delete id="deleteById" parameterType="long">
+    <!-- CRUD-->
+
+    <insert id="writePost" parameterType="postDto" useGeneratedKeys="true" keyProperty="postId" keyColumn="post_id">
+        INSERT INTO post (user_id, region, title, content, recruits, date_time)
+        VALUES (#{userId}, #{region}, #{title}, #{content}, #{recruits}, #{dateTime})
+    </insert>
+
+    <select id="listPost" resultType="list" resultMap="postDetail">
+        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username
+        FROM post p
+        JOIN user u ON p.user_id = u.user_id;
+    </select>
+
+    <select id="detailPost" parameterType="long" resultMap="postDetail">
+        SELECT p.post_id, p.user_id, p.region, p.title, p.content, p.recruits, p.date_time, p.create_date, u.username
+        FROM post p
+        JOIN user u ON p.user_id = u.user_id
+        WHERE post_id = #{postId};
+    </select>
+
+    <delete id="deletePost" parameterType="long">
         DELETE FROM post
         WHERE post_id = #{postId}
     </delete>
-
-
-
 
 </mapper>

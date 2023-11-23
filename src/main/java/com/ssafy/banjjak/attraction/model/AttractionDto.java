@@ -14,7 +14,7 @@ public class AttractionDto {
     private Long attractionId;
     private String region;
     private String name;
-    private String description;
+    private String address;
     private Double latitude;
     private Double longitude;
     private String type;

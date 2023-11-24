@@ -46,6 +46,7 @@
 - [MySQL](https://www.mysql.com/)
 - [JWT](https://jwt.io/)
 - [Mybatis](https://mybatis.org/mybatis-3/)
+- [redis](https://redis.io/)
 
 <h2 id="structure"> 🕹️ Source Code Structure </h2>
 
